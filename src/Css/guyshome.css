@@ -1,0 +1,9 @@
+.navbar-light .navbar-nav .active::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    content: " ";
+    border-bottom: 5px solid #5BC0EB;
+    margin : 0 !important; 
+}

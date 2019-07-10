@@ -1,0 +1,56 @@
+
+
+
+
+
+input[type='text'] {
+ 
+  
+
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: none;
+
+  
+  border-radius: 30px;
+  box-shadow: 2px 2px 2px 2px  #888888
+}
+
+input[type='password'] {
+
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: none;
+
+
+  border-radius: 30px;
+  box-shadow: 2px 2px 2px 2px  #888888
+
+}
+
+input[type='submit'] {
+ 
+  
+  color: #fff;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none;
+
+  border-radius: 30px
+}
+button[type='submit'] {
+ 
+  
+  color: #fff;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: none;
+
+  border-radius: 30px
+}
+
+.check {
+  font-size: 16px;
+}

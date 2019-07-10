@@ -1,0 +1,59 @@
+
+
+
+
+
+input[type='text'] {
+ 
+  
+
+    font-size: 16px;
+ 
+    border: none;
+padding:  13px 10px 10px 10px;
+    width:40%;
+    border-radius: 30px;
+    box-shadow: 2px 2px 2px 2px  #888888
+  }
+  
+  input[type='password'] {
+  
+    font-size: 16px;
+    padding:  10px 10px 10px 10px;
+ 
+
+    border: none;
+    width:40%;
+  
+    border-radius: 30px;
+    box-shadow: 2px 2px 2px 2px  #888888
+  
+  }
+  
+  input[type='submit'] {
+   
+    
+    color: #fff;
+    font-size: 20px;
+    
+    border: none;
+    padding:  10px 10px 10px 10px;
+    width:40%;
+    border-radius: 30px
+  }
+  button[type='submit'] {
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    width:40%;
+    padding:  10px 10px 10px 10px;
+    border-radius: 30px
+  }
+  .sethu{
+   color:red;
+   padding-top: 100px !important;
+  }
+  .check {
+    font-size: 16px;
+  }
+  
