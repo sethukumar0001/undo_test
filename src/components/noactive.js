@@ -131,9 +131,7 @@ componentDidMount() {
   <Card className={classes.card} style={cardStyle}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          
          <div key={member.id}>{member.firstname} {member.lastname} - {member.email}</div>
-      
         </Typography>
       </CardContent>
     

@@ -5,6 +5,7 @@ import '../Css/mygigs.css';
 import AuthHelperMethods from '../Authentication/AuthHelperMethods';
 import withAuth from '../Authentication/withAuth';
 //import axios from 'axios'
+import Likes from '../components/Likes';
 
 //import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -133,7 +134,7 @@ componentDidMount() {
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           
          <div key={member.id}>{member.firstname} {member.lastname} - {member.email}</div>
-      
+      <Likes></Likes>
         </Typography>
       </CardContent>
     

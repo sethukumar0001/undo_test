@@ -2,7 +2,7 @@ import decode from 'jwt-decode';
 
 export default class AuthHelperMethods {
     
-    // Initializing important variables
+// Initializing important variables
     
     login = (email, password) => {
         
@@ -25,6 +25,7 @@ export default class AuthHelperMethods {
         const token = this.getToken() // Getting token from localstorage
         return !!token && !this.isTokenExpired(token) // handwaiving here
     }
+
 
     isTokenExpired = (token) => {
         try {

@@ -21,16 +21,16 @@ router.use(function (req, res, next) {
   next();
 });
 
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'login_auth'
-})
+// var mysql = require('mysql')
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   password: '',
+//   database: 'login_auth'
+// })
 
-connection.connect()
-connection.end()
+// connection.connect()
+// connection.end()
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -91,34 +91,51 @@ router.get('/gigs', (req, res) => {
     })
 
 
-
-
-  router.post('/profile', (req, res) => {
-
-    
-    skills = req.body.data.skills;
-    qualification = req.body.data.qualification;
-    experience=req.body.data.experience;
-    location = req.body.data.location;
-
-    //const saltRounds = 10;
-    // bcrypt.hash(location, saltRounds, function (err, hash) {
-      db.userDetails.create({
-        skills:skills,
-        qualification:qualification,
-        experience:experience,
-        location:location,
-       
+    router.post('/likes', (req, res) => {
+      db.social.findOne({
+        where: {
+            email: req.body.data.email
+        }
         
-      }).then((result) => {
-        console.log("profile created: ", result);
-        res.json("profile updated!");
-        
-        
-      // })
-    });
+    }).then(function(user) {
+      if (!user) {
+        user= req.body.data.user;
+        likes = req.body.data.likes;
+        console.log(req.body.data)
 
-    });
+        db.social.update({
+          email:user,
+          likes:likes 
+          
+        }).then((result) => {
+          console.log("Item Liked: ", result);
+          res.json("Item liked...");     
+        })
+      }
+      })
+        })
+
+
+    router.post('/profile', (req, res)=>{
+      skills = req.body.data.skills,
+      qualification = req.body.data.qualification,
+      experience=req.body.data.experience,
+      location = req.body.data.location,
+      console.log(req.body.data.user.email);
+      db.userDetails.update({
+        skills : skills,
+        qualification : qualification,
+        experience :experience,
+        location : location,
+      },{ 
+          where: { email:req.body.data.user.email} 
+      }).then(result => {
+          res.status(200).json(result);
+          console.log("profile updated: ", result);
+          res.json("profile updated!");
+      });
+  });
+
 
   //   router.get('/gigs', function(req, res, next) {
   //     db.query('select * from gigs_post', function (error, results, fields) {
