@@ -1,0 +1,17 @@
+span {
+    background-image: url(../components/assets/images/heart.png);
+    background-repeat:  no-repeat;
+    display: block;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
+    text-indent: -9999px;
+    margin-left: 83%
+  }
+  .heartOpen {
+    background-position: 0 0;
+  }
+  .heartFull {
+    background-position: 0 -20px;
+  }
+  

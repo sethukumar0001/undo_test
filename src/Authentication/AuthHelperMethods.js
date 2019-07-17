@@ -1,9 +1,7 @@
 import decode from 'jwt-decode';
 
-export default class AuthHelperMethods {
-    
-// Initializing important variables
-    
+export default class AuthHelperMethods {    
+// Initializing important variables   
     login = (email, password) => {
         
         // Get a token from api server using the fetch api
@@ -14,6 +12,7 @@ export default class AuthHelperMethods {
                 password
             })
         }).then(res => {
+            console.log(res);
             this.setToken(res.token) // Setting the token in localStorage
             return Promise.resolve(res);
         })

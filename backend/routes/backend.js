@@ -42,6 +42,97 @@ const jwtMW = exjwt({
 });
 
 
+
+router.post('/displaypost', (req, res) => {
+
+    email=req.body.data.user.email;
+    project_id = req.body.id;
+
+    console.log(project_id);
+    console.log(req.body.data.user.email);
+    console.log(req.body.data.user.myData);
+
+
+      db.postSubmit.create({
+        email:email,
+         project_title:project_id           
+      }).then((result) => {
+        console.log("insertion successful: ", result);
+        res.json("insertion successful...");     
+      })
+
+    })
+
+
+router.post('/liked', (req, res) => {
+  
+  db.LikeStatus.findOne({
+    where: {
+        id: req.body.data.myData
+    }
+}).then(function(user) {
+  if (!user) {
+
+      likeStatus=req.body.data.btnText;
+      email=req.body.data.user.email;
+      project_id = req.body.data.myData;
+
+      db.LikeStatus.create({
+        project_id:project_id,
+        likeStatus:likeStatus,
+         email:email     
+      }).then((result) => {
+        console.log("insertion successful: ", result);
+        res.json("insertion successful...");     
+      })
+    }
+    else{
+
+      likeStatus=req.body.data.btnText;
+      email=req.body.data.user.email;
+      project_id = req.body.data.myData;
+
+      db.LikeStatus.update({
+        project_id:project_id,
+        likeStatus:likeStatus,
+         email:email     
+      }).then((result) => {
+        console.log("insertion successful: ", result);
+        res.json("insertion successful...");     
+      })
+
+    }
+  })
+})
+
+
+
+router.post('/unliked', (req, res) => {
+
+  likeStatus=req.body.data.btnText;
+  email=req.body.data.user.email;
+  project_id = req.body.data.myData;
+
+  console.log(project_id);
+  console.log(req.body.data.user.email);
+  console.log(req.body.data.btnText);
+ 
+  db.LikeStatus.update({
+    project_id:project_id,
+    likeStatus:likeStatus,
+    email:email 
+  },{ 
+      where: { project_id:req.body.data.myData} 
+  }).then((result) => {
+      console.log("insertion successful: ", result);
+      res.json("insertion successful...");     
+    })
+})
+
+
+
+
+
 router.post('/add', (req, res) => {
   db.userDetails.findOne({
     where: {
@@ -56,8 +147,8 @@ router.post('/add', (req, res) => {
     password = req.body.data.password;
     radio=req.body.data.selectedValue;
     //category= req.body.data.category;
-console.log(req.body.data);
-//cconsole.log(req.data);
+    console.log(req.body.data);
+    //cconsole.log(req.data);
 
 
     const saltRounds = 10;
@@ -81,40 +172,50 @@ console.log(req.body.data);
 
 
 router.get('/gigs', (req, res) => {
-  db.userDetails.findAll().then((result) => {
+  db.posts.findAll().then((result) => {
     console.log("User created: ", result);
     res.json({
       status: 'success',
       data: result,
     })  
-      })
     })
+  })
 
 
-    router.post('/likes', (req, res) => {
-      db.social.findOne({
-        where: {
-            email: req.body.data.email
-        }
-        
-    }).then(function(user) {
-      if (!user) {
-        user= req.body.data.user;
-        likes = req.body.data.likes;
-        console.log(req.body.data)
+  router.post('/getid', (req, res) => {
+    console.log(req.body.user.email)
+     //email:req.body.data.user.email
 
-        db.social.update({
-          email:user,
-          likes:likes 
-          
-        }).then((result) => {
-          console.log("Item Liked: ", result);
-          res.json("Item liked...");     
-        })
-      }
+
+        db.userDetails.findAll({},{ 
+          where: { email:req.body.data.user.email} 
+      }).then(result => {
+          res.status(200).json(result);
+          console.log("data fetched: ", result);
+          res.json("data fetched!");
       })
-        })
-
+        .then((result) => {
+          console.log("data fetched: ", result);
+          res.json({
+            status: 'success',
+            data: result,
+          })  
+          })
+      })
+  
+      router.post('/getid', (req, res)=>{
+        email = req.body.data.user.email
+        console.log(req.body.data.user.email);
+        db.userDetails.find({
+          id : id
+        },{ 
+            where: { email:email} 
+        }).then(result => {
+            res.status(200).json(result);
+            console.log("data retrived: ", result);
+            res.json("data retrived!");
+        });
+    });
 
     router.post('/profile', (req, res)=>{
       skills = req.body.data.skills,
@@ -153,7 +254,6 @@ router.get('/gigs', (req, res) => {
           status: 'success',
           data: rows,
         })
-
       else
         res.json([{
           status: 'failed',
@@ -184,7 +284,6 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password, function (err, result) {
         if (result === true) {
           console.log("Valid!");
-
           let token = jwt.sign(
             {
               email: user.email
@@ -209,6 +308,21 @@ router.post('/login', (req, res) => {
       });
     })
 });
+
+router.get('/saved', (req, res) => {
+  post.hasMany(post, {foreignKey: 'project_title'})
+LikeStatus.belongsTo(LikeStatus, {foreignKey: 'project_id'})
+
+Post.find({ where: { }, include: [User]}).then(posts => {
+    console.log("User created: ", result);
+    res.json({
+      status: 'success',
+      data: posts,
+    })  
+    
+  });
+  })
+
 
 router.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {
   console.log("Web Token Checked........jwt response");

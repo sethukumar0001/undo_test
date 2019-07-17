@@ -87,7 +87,7 @@ componentDidMount() {
 
   <ul className="navbar-nav ml-auto "> {/* nav ul started */}
     <li className="nav-item mr-3"> {/* li 1 started */}
-      <Link to="/nosaved"  className="nav-link text-black " >My Gigs</Link> 
+      <Link to="/mygigs"  className="nav-link text-black " >My Gigs</Link> 
     </li> {/* li 1 closed */}
     <li className="nav-item mr-3 "> {/* li2 started */}
     <Link to="/profileone" className="nav-link text-black "  >Profile</Link >

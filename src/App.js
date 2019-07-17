@@ -27,11 +27,12 @@ class App extends Component {
       {/* sethu */}
 <Switch>     
   <Route exact path='/' component={Home}></Route>
+  <Route path='/mygigs' component={MygigsOne}></Route>
   <Route  path='/login' component={Login}></Route>
   <Route  path='/register' component={Register}></Route>
   <Route  path='/undoguyshome' component={UndoguysHome}></Route>
   <Route path='/profileone' component={Profile}></Route>
-  <Route path='/mygigs' component={MygigsOne}></Route>
+  
   <Route path='/noactive' component={NoActive}></Route>
   <Route path='/nosaved' component={NoSaved}></Route>
   <Route path='/nocompleted' component={NoCompleted}></Route>
