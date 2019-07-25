@@ -52,10 +52,9 @@ router.post('/displaypost', (req, res) => {
     console.log(req.body.data.user.email);
     console.log(req.body.data.user.myData);
 
-
-      db.postSubmit.create({
+    db.postSubmit.create({
         email:email,
-         project_title:project_id           
+         project_id:project_id           
       }).then((result) => {
         console.log("insertion successful: ", result);
         res.json("insertion successful...");     
@@ -309,19 +308,32 @@ router.post('/login', (req, res) => {
     })
 });
 
-router.get('/saved', (req, res) => {
-  post.hasMany(post, {foreignKey: 'project_title'})
-LikeStatus.belongsTo(LikeStatus, {foreignKey: 'project_id'})
 
-Post.find({ where: { }, include: [User]}).then(posts => {
-    console.log("User created: ", result);
+
+router.get('/saved', (req, res) => {
+  userDetails.belongsToMany(postSubmit);
+postSubmit.belongsToMany(userDetails);
+ userDetails.findAll({
+    include: [
+        {
+            // Do an INNER JOIN to find the blogs that user has access to.
+           // Don't return any data here.
+            model: postSubmit,
+            where: { project_id }
+        },
+      ]
+    })
+ 
+        
+        .then(posts => {
+    console.log(JSON.stringify(posts));
     res.json({
-      status: 'success',
+      status:'success',
       data: posts,
-    })  
-    
+    }) 
   });
-  })
+})
+  
 
 
 router.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {

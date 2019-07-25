@@ -45,7 +45,9 @@ componentDidMount() {
      }
   })
     .then(res => res.json())
+    
     .then(members => this.setState({ data: members.posts }));   
+    console.log(this.state.data)
 }
 
 
@@ -57,7 +59,6 @@ componentWillMount(){
   })
   console.log(this.state.myData); 
 }
-
  
     render() {
       console.log(this.state.user.email);
@@ -121,7 +122,7 @@ componentWillMount(){
 
 
 
-<div>mygigs</div>
+<div>nosaved</div>
  
 <div >
   {this.state.data.map((member,i) =>(

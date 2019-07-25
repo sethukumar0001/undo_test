@@ -30,7 +30,7 @@ this.Auth.login(this.state.email,this.state.password)
 		return alert("sorry credentials does not exist");
 	}
 	this.props.history.replace('/mygigs');
-})
+	})
 .catch(err =>{
 	alert(err)
 })

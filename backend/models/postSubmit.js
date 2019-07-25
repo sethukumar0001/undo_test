@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
             primaryKey: true,
             field: 'id'
         },
-        project_title: {
+        project_id: {
             type: DataTypes.STRING,
             allowNull: true
         },
